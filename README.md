@@ -21,7 +21,6 @@ local outlineEnabled = false
 local flightSpeed = 50
 local panelMinimized = false
 local currentTab = "Visual" -- "Visual" ou "Movimento"
-
 -- Variáveis da aba Info
 local fpsLabel = nil
 local posXLabel = nil
@@ -31,7 +30,6 @@ local gameNameLabel = nil
 local frameCount = 0
 local lastFrameTime = tick()
 local currentFPS = 60
-
 -- Criar ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "LLGameHub"
@@ -146,7 +144,7 @@ tabBar.Position = UDim2.new(0, 10, 0, 45)
 tabBar.BackgroundTransparency = 1
 tabBar.Parent = mainPanel
 local tabVisual = Instance.new("TextButton")
-tabVisual.Size = UDim2.new(0.333, -5, 1, 0)
+tabVisual.Size = UDim2.new(0.25, -5, 1, 0)
 tabVisual.Position = UDim2.new(0, 0, 0, 0)
 tabVisual.BackgroundColor3 = Color3.fromRGB(30, 60, 100)
 tabVisual.Text = "Visual"
@@ -159,8 +157,8 @@ local UICornerTab1 = Instance.new("UICorner")
 UICornerTab1.CornerRadius = UDim.new(0, 8)
 UICornerTab1.Parent = tabVisual
 local tabMovimento = Instance.new("TextButton")
-tabMovimento.Size = UDim2.new(0.333, -5, 1, 0)
-tabMovimento.Position = UDim2.new(0.333, 5, 0, 0)
+tabMovimento.Size = UDim2.new(0.25, -5, 1, 0)
+tabMovimento.Position = UDim2.new(0.25, 5, 0, 0)
 tabMovimento.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabMovimento.Text = "Movimento"
 tabMovimento.TextColor3 = Color3.fromRGB(150, 180, 220)
@@ -171,10 +169,9 @@ tabMovimento.Parent = tabBar
 local UICornerTab2 = Instance.new("UICorner")
 UICornerTab2.CornerRadius = UDim.new(0, 8)
 UICornerTab2.Parent = tabMovimento
-
 local tabInfo = Instance.new("TextButton")
-tabInfo.Size = UDim2.new(0.333, -5, 1, 0)
-tabInfo.Position = UDim2.new(0.666, 5, 0, 0)
+tabInfo.Size = UDim2.new(0.25, -5, 1, 0)
+tabInfo.Position = UDim2.new(0.5, 5, 0, 0)
 tabInfo.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabInfo.Text = "Info"
 tabInfo.TextColor3 = Color3.fromRGB(150, 180, 220)
@@ -185,7 +182,19 @@ tabInfo.Parent = tabBar
 local UICornerTab3 = Instance.new("UICorner")
 UICornerTab3.CornerRadius = UDim.new(0, 8)
 UICornerTab3.Parent = tabInfo
-
+local tabTpMec = Instance.new("TextButton")
+tabTpMec.Size = UDim2.new(0.25, -5, 1, 0)
+tabTpMec.Position = UDim2.new(0.75, 5, 0, 0)
+tabTpMec.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
+tabTpMec.Text = "Tp Mec Br"
+tabTpMec.TextColor3 = Color3.fromRGB(150, 180, 220)
+tabTpMec.Font = Enum.Font.GothamBold
+tabTpMec.TextSize = 16
+tabTpMec.BorderSizePixel = 0
+tabTpMec.Parent = tabBar
+local UICornerTab4 = Instance.new("UICorner")
+UICornerTab4.CornerRadius = UDim.new(0, 8)
+UICornerTab4.Parent = tabTpMec
 -- Container de conteúdo (ScrollingFrame)
 local contentFrame = Instance.new("ScrollingFrame")
 contentFrame.Size = UDim2.new(1, -20, 1, -135)
@@ -195,7 +204,6 @@ contentFrame.BorderSizePixel = 0
 contentFrame.ScrollBarThickness = 5
 contentFrame.CanvasSize = UDim2.new(0, 0, 0, 520) 
 contentFrame.Parent = mainPanel
-
 -- ============================================================
 -- CRIAÇÃO DOS TOGGLES (separados por aba)
 -- ============================================================
@@ -248,6 +256,33 @@ disableInvisibility()
 end
 end)
 invisToggle.frame.Visible = false
+
+-- Botão de TP na aba Tp Mec Br
+local tpButton = Instance.new("TextButton")
+tpButton.Size = UDim2.new(0, 280, 0, 40)
+tpButton.Position = UDim2.new(0, 10, 0, 0)
+tpButton.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
+tpButton.Text = "Tp para o local das Entregas"
+tpButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpButton.Font = Enum.Font.GothamBold
+tpButton.TextSize = 16
+tpButton.BorderSizePixel = 0
+tpButton.Visible = false
+tpButton.Parent = contentFrame
+local UICornerTp = Instance.new("UICorner")
+UICornerTp.CornerRadius = UDim.new(0, 8)
+UICornerTp.Parent = tpButton
+
+tpButton.MouseButton1Click:Connect(function()
+	if rootPart then
+		rootPart.CFrame = CFrame.new(-25699.04, 32.99, -5891.38)
+		StarterGui:SetCore("SendNotification", {
+			Title = "LLGameHub",
+			Text = "Teleportado para o local das Entregas!",
+			Duration = 3
+		})
+	end
+end)
 
 -- Aba Info Container
 local infoContainer = Instance.new("Frame")
@@ -432,6 +467,8 @@ tabMovimento.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabMovimento.TextColor3 = Color3.fromRGB(150, 180, 220)
 tabInfo.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabInfo.TextColor3 = Color3.fromRGB(150, 180, 220)
+tabTpMec.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
+tabTpMec.TextColor3 = Color3.fromRGB(150, 180, 220)
 elseif tabName == "Movimento" then
 tabVisual.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabVisual.TextColor3 = Color3.fromRGB(150, 180, 220)
@@ -439,13 +476,26 @@ tabMovimento.BackgroundColor3 = Color3.fromRGB(30, 60, 100)
 tabMovimento.TextColor3 = Color3.fromRGB(100, 200, 255)
 tabInfo.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabInfo.TextColor3 = Color3.fromRGB(150, 180, 220)
-else -- Info
+tabTpMec.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
+tabTpMec.TextColor3 = Color3.fromRGB(150, 180, 220)
+elseif tabName == "Info" then
 tabVisual.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabVisual.TextColor3 = Color3.fromRGB(150, 180, 220)
 tabMovimento.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
 tabMovimento.TextColor3 = Color3.fromRGB(150, 180, 220)
 tabInfo.BackgroundColor3 = Color3.fromRGB(30, 60, 100)
 tabInfo.TextColor3 = Color3.fromRGB(100, 200, 255)
+tabTpMec.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
+tabTpMec.TextColor3 = Color3.fromRGB(150, 180, 220)
+else -- Tp Mec Br
+tabVisual.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
+tabVisual.TextColor3 = Color3.fromRGB(150, 180, 220)
+tabMovimento.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
+tabMovimento.TextColor3 = Color3.fromRGB(150, 180, 220)
+tabInfo.BackgroundColor3 = Color3.fromRGB(20, 40, 70)
+tabInfo.TextColor3 = Color3.fromRGB(150, 180, 220)
+tabTpMec.BackgroundColor3 = Color3.fromRGB(30, 60, 100)
+tabTpMec.TextColor3 = Color3.fromRGB(100, 200, 255)
 end
 -- Mostrar/esconder toggles
 espToggle.frame.Visible = (tabName == "Visual")
@@ -454,6 +504,7 @@ flightToggle.frame.Visible = (tabName == "Movimento")
 noclipToggle.frame.Visible = (tabName == "Movimento")
 fullbrightToggle.frame.Visible = (tabName == "Movimento")
 invisToggle.frame.Visible = (tabName == "Movimento")
+tpButton.Visible = (tabName == "Tp Mec Br")
 speedLabel.Visible = (tabName == "Movimento")
 speedSlider.Visible = (tabName == "Movimento")
 speedInput.Visible = (tabName == "Movimento")
@@ -470,28 +521,11 @@ end)
 tabInfo.MouseButton1Click:Connect(function()
 showTab("Info")
 end)
+tabTpMec.MouseButton1Click:Connect(function()
+showTab("Tp Mec Br")
+end)
 -- Mostrar aba Visual por padrão
 showTab("Visual")
-
--- Atualização da aba Info
-RunService.RenderStepped:Connect(function()
-	if currentTab == "Info" then
-		frameCount = frameCount + 1
-		if tick() - lastFrameTime >= 1 then
-			currentFPS = frameCount
-			frameCount = 0
-			lastFrameTime = tick()
-		end
-		if fpsLabel then fpsLabel.Text = tostring(currentFPS) end
-		if rootPart and posXLabel then
-			local pos = rootPart.Position
-			posXLabel.Text = string.format("X: %.2f", pos.X)
-			posYLabel.Text = string.format("Y: %.2f", pos.Y)
-			posZLabel.Text = string.format("Z: %.2f", pos.Z)
-		end
-	end
-end)
-
 -- ============================================================
 -- ÍCONE MINIMIZADO
 -- ============================================================
@@ -799,6 +833,7 @@ addButtonFeedback(minimizedIcon)
 addButtonFeedback(tabVisual)
 addButtonFeedback(tabMovimento)
 addButtonFeedback(applyButton)
+addButtonFeedback(tpButton)
 -- Limpeza ao sair
 player.OnTeleport:Connect(function()
 screenGui:Destroy()
