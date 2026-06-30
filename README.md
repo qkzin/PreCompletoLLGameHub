@@ -257,28 +257,54 @@ end
 end)
 invisToggle.frame.Visible = false
 
--- Botão de TP na aba Tp Mec Br
-local tpButton = Instance.new("TextButton")
-tpButton.Size = UDim2.new(0, 280, 0, 40)
-tpButton.Position = UDim2.new(0, 10, 0, 0)
-tpButton.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
-tpButton.Text = "Tp para o local das Entregas"
-tpButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-tpButton.Font = Enum.Font.GothamBold
-tpButton.TextSize = 16
-tpButton.BorderSizePixel = 0
-tpButton.Visible = false
-tpButton.Parent = contentFrame
-local UICornerTp = Instance.new("UICorner")
-UICornerTp.CornerRadius = UDim.new(0, 8)
-UICornerTp.Parent = tpButton
+-- Botões da aba Tp Mec Br
+local tpEntregasButton = Instance.new("TextButton")
+tpEntregasButton.Size = UDim2.new(0, 280, 0, 40)
+tpEntregasButton.Position = UDim2.new(0, 10, 0, 0)
+tpEntregasButton.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
+tpEntregasButton.Text = "Tp para o local das Entregas"
+tpEntregasButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpEntregasButton.Font = Enum.Font.GothamBold
+tpEntregasButton.TextSize = 16
+tpEntregasButton.BorderSizePixel = 0
+tpEntregasButton.Visible = false
+tpEntregasButton.Parent = contentFrame
+local UICornerTp1 = Instance.new("UICorner")
+UICornerTp1.CornerRadius = UDim.new(0, 8)
+UICornerTp1.Parent = tpEntregasButton
 
-tpButton.MouseButton1Click:Connect(function()
+tpEntregasButton.MouseButton1Click:Connect(function()
 	if rootPart then
 		rootPart.CFrame = CFrame.new(-25699.04, 32.99, -5891.38)
 		StarterGui:SetCore("SendNotification", {
 			Title = "LLGameHub",
 			Text = "Teleportado para o local das Entregas!",
+			Duration = 3
+		})
+	end
+end)
+
+local tpCometButton = Instance.new("TextButton")
+tpCometButton.Size = UDim2.new(0, 280, 0, 40)
+tpCometButton.Position = UDim2.new(0, 10, 0, 50)
+tpCometButton.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
+tpCometButton.Text = "Tp Comet Auto Peças"
+tpCometButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpCometButton.Font = Enum.Font.GothamBold
+tpCometButton.TextSize = 16
+tpCometButton.BorderSizePixel = 0
+tpCometButton.Visible = false
+tpCometButton.Parent = contentFrame
+local UICornerTp2 = Instance.new("UICorner")
+UICornerTp2.CornerRadius = UDim.new(0, 8)
+UICornerTp2.Parent = tpCometButton
+
+tpCometButton.MouseButton1Click:Connect(function()
+	if rootPart then
+		rootPart.CFrame = CFrame.new(-3400.63, 65.69, -3352.48)
+		StarterGui:SetCore("SendNotification", {
+			Title = "LLGameHub",
+			Text = "Teleportado para Comet Auto Peças!",
 			Duration = 3
 		})
 	end
@@ -504,7 +530,8 @@ flightToggle.frame.Visible = (tabName == "Movimento")
 noclipToggle.frame.Visible = (tabName == "Movimento")
 fullbrightToggle.frame.Visible = (tabName == "Movimento")
 invisToggle.frame.Visible = (tabName == "Movimento")
-tpButton.Visible = (tabName == "Tp Mec Br")
+tpEntregasButton.Visible = (tabName == "Tp Mec Br")
+tpCometButton.Visible = (tabName == "Tp Mec Br")
 speedLabel.Visible = (tabName == "Movimento")
 speedSlider.Visible = (tabName == "Movimento")
 speedInput.Visible = (tabName == "Movimento")
@@ -833,7 +860,8 @@ addButtonFeedback(minimizedIcon)
 addButtonFeedback(tabVisual)
 addButtonFeedback(tabMovimento)
 addButtonFeedback(applyButton)
-addButtonFeedback(tpButton)
+addButtonFeedback(tpEntregasButton)
+addButtonFeedback(tpCometButton)
 -- Limpeza ao sair
 player.OnTeleport:Connect(function()
 screenGui:Destroy()
