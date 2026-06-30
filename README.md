@@ -202,7 +202,7 @@ contentFrame.Position = UDim2.new(0, 10, 0, 90)
 contentFrame.BackgroundTransparency = 1
 contentFrame.BorderSizePixel = 0
 contentFrame.ScrollBarThickness = 5
-contentFrame.CanvasSize = UDim2.new(0, 0, 0, 600) 
+contentFrame.CanvasSize = UDim2.new(0, 0, 0, 800) 
 contentFrame.Parent = mainPanel
 -- ============================================================
 -- CRIAÇÃO DOS TOGGLES (separados por aba)
@@ -331,6 +331,58 @@ tpGaragemButton.MouseButton1Click:Connect(function()
 		StarterGui:SetCore("SendNotification", {
 			Title = "LLGameHub",
 			Text = "Teleportado para Garagem!",
+			Duration = 3
+		})
+	end
+end)
+
+local tpPosto1Button = Instance.new("TextButton")
+tpPosto1Button.Size = UDim2.new(0, 280, 0, 40)
+tpPosto1Button.Position = UDim2.new(0, 10, 0, 150)
+tpPosto1Button.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
+tpPosto1Button.Text = "Tp Para O Posto 1"
+tpPosto1Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpPosto1Button.Font = Enum.Font.GothamBold
+tpPosto1Button.TextSize = 16
+tpPosto1Button.BorderSizePixel = 0
+tpPosto1Button.Visible = false
+tpPosto1Button.Parent = contentFrame
+local UICornerTp4 = Instance.new("UICorner")
+UICornerTp4.CornerRadius = UDim.new(0, 8)
+UICornerTp4.Parent = tpPosto1Button
+
+tpPosto1Button.MouseButton1Click:Connect(function()
+	if rootPart then
+		rootPart.CFrame = CFrame.new(-3356.38, 66.07, -3605.46)
+		StarterGui:SetCore("SendNotification", {
+			Title = "LLGameHub",
+			Text = "Teleportado para O Posto 1!",
+			Duration = 3
+		})
+	end
+end)
+
+local tpPosto2Button = Instance.new("TextButton")
+tpPosto2Button.Size = UDim2.new(0, 280, 0, 40)
+tpPosto2Button.Position = UDim2.new(0, 10, 0, 200)
+tpPosto2Button.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
+tpPosto2Button.Text = "Tp para Posto 2"
+tpPosto2Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpPosto2Button.Font = Enum.Font.GothamBold
+tpPosto2Button.TextSize = 16
+tpPosto2Button.BorderSizePixel = 0
+tpPosto2Button.Visible = false
+tpPosto2Button.Parent = contentFrame
+local UICornerTp5 = Instance.new("UICorner")
+UICornerTp5.CornerRadius = UDim.new(0, 8)
+UICornerTp5.Parent = tpPosto2Button
+
+tpPosto2Button.MouseButton1Click:Connect(function()
+	if rootPart then
+		rootPart.CFrame = CFrame.new(-20853.93, 64.79, -3002.39)
+		StarterGui:SetCore("SendNotification", {
+			Title = "LLGameHub",
+			Text = "Teleportado para Posto 2!",
 			Duration = 3
 		})
 	end
@@ -559,6 +611,8 @@ invisToggle.frame.Visible = (tabName == "Movimento")
 tpEntregasButton.Visible = (tabName == "Tp Mec Br")
 tpCometButton.Visible = (tabName == "Tp Mec Br")
 tpGaragemButton.Visible = (tabName == "Tp Mec Br")
+tpPosto1Button.Visible = (tabName == "Tp Mec Br")
+tpPosto2Button.Visible = (tabName == "Tp Mec Br")
 speedLabel.Visible = (tabName == "Movimento")
 speedSlider.Visible = (tabName == "Movimento")
 speedInput.Visible = (tabName == "Movimento")
@@ -580,6 +634,17 @@ showTab("Tp Mec Br")
 end)
 -- Mostrar aba Visual por padrão
 showTab("Visual")
+
+-- ====================== HOTKEY SYSTEM ======================
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	if gameProcessed then return end
+	if input.KeyCode == Enum.KeyCode.Insert then  -- Tecla: Insert
+		panelMinimized = not panelMinimized
+		mainPanel.Visible = not panelMinimized
+		minimizedIcon.Visible = panelMinimized
+	end
+end)
+
 -- ============================================================
 -- ÍCONE MINIMIZADO
 -- ============================================================
@@ -890,6 +955,8 @@ addButtonFeedback(applyButton)
 addButtonFeedback(tpEntregasButton)
 addButtonFeedback(tpCometButton)
 addButtonFeedback(tpGaragemButton)
+addButtonFeedback(tpPosto1Button)
+addButtonFeedback(tpPosto2Button)
 -- Limpeza ao sair
 player.OnTeleport:Connect(function()
 screenGui:Destroy()
@@ -897,6 +964,6 @@ end)
 -- Notificação inicial
 StarterGui:SetCore("SendNotification", {
 Title = "LLGameHub",
-Text = "Sistema com abas e velocidade personalizável carregado!",
+Text = "Sistema carregado! (Hotkey: Insert)",
 Duration = 5
 })
