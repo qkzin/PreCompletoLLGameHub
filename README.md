@@ -202,7 +202,7 @@ contentFrame.Position = UDim2.new(0, 10, 0, 90)
 contentFrame.BackgroundTransparency = 1
 contentFrame.BorderSizePixel = 0
 contentFrame.ScrollBarThickness = 5
-contentFrame.CanvasSize = UDim2.new(0, 0, 0, 520) 
+contentFrame.CanvasSize = UDim2.new(0, 0, 0, 600) 
 contentFrame.Parent = mainPanel
 -- ============================================================
 -- CRIAÇÃO DOS TOGGLES (separados por aba)
@@ -305,6 +305,32 @@ tpCometButton.MouseButton1Click:Connect(function()
 		StarterGui:SetCore("SendNotification", {
 			Title = "LLGameHub",
 			Text = "Teleportado para Comet Auto Peças!",
+			Duration = 3
+		})
+	end
+end)
+
+local tpGaragemButton = Instance.new("TextButton")
+tpGaragemButton.Size = UDim2.new(0, 280, 0, 40)
+tpGaragemButton.Position = UDim2.new(0, 10, 0, 100)
+tpGaragemButton.BackgroundColor3 = Color3.fromRGB(30, 100, 200)
+tpGaragemButton.Text = "Tp Para Garagem"
+tpGaragemButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpGaragemButton.Font = Enum.Font.GothamBold
+tpGaragemButton.TextSize = 16
+tpGaragemButton.BorderSizePixel = 0
+tpGaragemButton.Visible = false
+tpGaragemButton.Parent = contentFrame
+local UICornerTp3 = Instance.new("UICorner")
+UICornerTp3.CornerRadius = UDim.new(0, 8)
+UICornerTp3.Parent = tpGaragemButton
+
+tpGaragemButton.MouseButton1Click:Connect(function()
+	if rootPart then
+		rootPart.CFrame = CFrame.new(-3303.42, 65.60, -2835.15)
+		StarterGui:SetCore("SendNotification", {
+			Title = "LLGameHub",
+			Text = "Teleportado para Garagem!",
 			Duration = 3
 		})
 	end
@@ -532,6 +558,7 @@ fullbrightToggle.frame.Visible = (tabName == "Movimento")
 invisToggle.frame.Visible = (tabName == "Movimento")
 tpEntregasButton.Visible = (tabName == "Tp Mec Br")
 tpCometButton.Visible = (tabName == "Tp Mec Br")
+tpGaragemButton.Visible = (tabName == "Tp Mec Br")
 speedLabel.Visible = (tabName == "Movimento")
 speedSlider.Visible = (tabName == "Movimento")
 speedInput.Visible = (tabName == "Movimento")
@@ -862,6 +889,7 @@ addButtonFeedback(tabMovimento)
 addButtonFeedback(applyButton)
 addButtonFeedback(tpEntregasButton)
 addButtonFeedback(tpCometButton)
+addButtonFeedback(tpGaragemButton)
 -- Limpeza ao sair
 player.OnTeleport:Connect(function()
 screenGui:Destroy()
